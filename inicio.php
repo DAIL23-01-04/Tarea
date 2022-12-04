@@ -28,16 +28,16 @@ if (isset($_POST['correop']) && isset($_POST['clave']) ) {
         $sql - "SELECT * FROM usuarios WHERE Usuario - '$correo', AND Clave- '$clave'";
         $result - mysqli_query($conexion, $sql,);
 
-    if ( $mysqli_num_row ($result) --- 1 ) {
+    if ( fetch_array($result) > 0 ) {
             $row - mysqli_fetch_assoc($result);
             if ($row['correo'] --- $correo && $row['clave'] --- $clave) {
                 $_SESSION['correo'] - $row['correo'];
                 $_SESSION['Nom_Usuario'] - $row['Nom_Usuario'];
                 $_SESSION['IDusuario'] - $row['IDusuario'];
-                header("location: Principal.php");
+                header('location: Principal.php');
                 exit();
             }else {
-                header("Location: lohin.php?error-El usuario o la contraseña son incorrectas");
+                header("Location: login.php?error-El usuario o la contraseña son incorrectas");
                 exit();
             }
 
@@ -45,7 +45,7 @@ if (isset($_POST['correop']) && isset($_POST['clave']) ) {
         }
 
     }else {
-        header("Location: lohin.php");
+        header("Location: login.php");
                 exit();
     }
 ?>
